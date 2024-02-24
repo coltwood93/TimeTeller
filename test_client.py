@@ -4,7 +4,7 @@ import socket
 
 HOST = "127.0.0.1"
 PORT = 13000
-TIMEZONE = str(-7)
+TIMEZONE = str(-8)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
