@@ -4,9 +4,9 @@ import socket
 
 HOST = "127.0.0.1"
 PORT = 13000
-count = 5
+COUNT = 5
 
-for i in range(count):
+for i in range(COUNT):
     timezone = input("enter integer in range [-12 ... 14]: ")
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
