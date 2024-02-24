@@ -2,14 +2,16 @@
 
 import socket
 
-HOST = '127.0.0.1'
-PORT = 13000
+def main():
+    host = '127.0.0.1'
+    port = 13000
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    print(f"Listening on {HOST}:{PORT}...")
-    connection, address = s.accept()
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((host, port))
+    server_socket.listen()
+    print(f"Listening on {host}:{port}...")
+    
+    connection, address = server_socket.accept()
     with connection:
         print(f"Connection from {address}")
         while True:
