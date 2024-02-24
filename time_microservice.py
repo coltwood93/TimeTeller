@@ -20,9 +20,12 @@ def get_adjusted_time(tz_offset) -> object:
     
     :return: current time object
     """
-    tz = timezone(timedelta(hours=float(tz_offset)))
-    adjusted_time = get_utc_time().astimezone(tz)
-    return adjusted_time
+    try:
+        tz = timezone(timedelta(hours=float(tz_offset)))
+        adjusted_time = get_utc_time().astimezone(tz)
+        return adjusted_time
+    except ValueError:
+        return None
 
 def format_time(time_obj, tz_offset) -> dict:
     """
@@ -51,9 +54,16 @@ def process_client(client_socket):
     """
     # format client data as integer
     data = client_socket.recv(1024).decode("utf-8").strip()
-    adjusted_time = get_adjusted_time(data)
-    print(f"Received '{data}'")
-    response = format_time(adjusted_time, data)
+    try:
+        adjusted_time = get_adjusted_time(data)
+        print(f"Received '{data}'")
+        if adjusted_time:
+            response = format_time(adjusted_time, data)
+        else:
+            response = {"error": "Invalid timezone format"}
+    except ValueError:
+        response = {"error": "Invalid input"}
+
     print(f"Sending '{response}'")
     client_socket.send(json.dumps(response).encode("utf-8"))
 
