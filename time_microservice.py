@@ -250,7 +250,6 @@ def timezone_search(tz_shortcode):
         "YAKT": 9,
         "YEKT": 5
     }
-    
     # return value if key is found, else return passed parameter
     return shortcodes.get(tz_shortcode.upper(), tz_shortcode)
 
