@@ -15,5 +15,5 @@ for i in range(COUNT):
         s.sendall(timezone.encode("utf-8"))
         data = s.recv(1024)
         response = json.loads(data.decode("utf-8"))
-        print(f"Request: {timezone}")
-        print(f"Received {response}")
+        print(f"\nRequest: {timezone}")
+        print(f"Received: {response}\n")

@@ -64,7 +64,7 @@ def process_client(client_socket):
     except ValueError:
         response = {"error": "Invalid input"}
 
-    print(f"Sending '{response}'")
+    print(f"Sending '{response}'\n")
     client_socket.send(json.dumps(response).encode("utf-8"))
 
 def main():
