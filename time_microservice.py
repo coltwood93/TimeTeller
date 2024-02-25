@@ -53,10 +53,10 @@ def process_client(client_socket):
     :param client_socket: the client socket
     """
     # format client data as integer
-    data = client_socket.recv(1024).decode("utf-8").strip()
+    data = client_socket.recv(1024).decode("utf-8")
     try:
-        adjusted_time = get_adjusted_time(data)
         print(f"Received '{data}'")
+        adjusted_time = get_adjusted_time(data)
         if adjusted_time:
             response = format_time(adjusted_time, data)
         else:
@@ -79,7 +79,8 @@ def main():
     while True:
         client_socket, addr = server_socket.accept()    # accept client connection
         print(f"Connection from {addr}")
-        process_client(client_socket)    # process client request
+        with client_socket:
+            process_client(client_socket)    # process client request
 
 if __name__ == "__main__":
     main()
