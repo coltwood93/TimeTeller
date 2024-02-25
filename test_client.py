@@ -1,6 +1,7 @@
 """Simple client used to test miroservice"""
 
 import socket
+import json
 
 HOST = "127.0.0.1"
 PORT = 13000
@@ -13,4 +14,6 @@ for i in range(COUNT):
         s.connect((HOST, PORT))
         s.sendall(timezone.encode("utf-8"))
         data = s.recv(1024)
-        print(f"Received {data!r}")
+        response = json.loads(data.decode("utf-8"))
+        print(f"Request: {timezone}")
+        print(f"Received {response}")
