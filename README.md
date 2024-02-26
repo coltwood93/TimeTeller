@@ -58,8 +58,6 @@ An example response demonstrating the JSON structure is:
 ## UML Diagram
 ```mermaid
 sequenceDiagram
- Microservice->>Microservice: Listening on specified port
- Microservice->>Microservice: Accept connections
  App->>+Microservice: Establish connection
  App->>Microservice: Send request containing target timezone
  alt client sent shortcode
