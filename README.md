@@ -62,7 +62,11 @@ sequenceDiagram
  Microservice->>Microservice: Accept connections
  App->>+Microservice: Establish connection
  App->>Microservice: Send request containing target timezone
- Microservice->>Microservice: Get current date/time and convert to timezone
- Microservice-->>-App: Return date/time JSON
+ alt client sent shortcode
+  Microservice->>Microservice: get UTC offset from dictionary
+ end
+ Microservice->>Microservice: Get current UTC date/time
+ Microservice->>Microservice: Convert UTC date/time using offset
+ Microservice-->>-App: Return JSON containing date/time 
  App->>App: Decode and load JSON
 ```
